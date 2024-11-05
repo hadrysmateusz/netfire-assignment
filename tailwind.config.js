@@ -2,7 +2,21 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: ({ theme }) => ({
+        "main-gradient-1": `linear-gradient(to right, ${theme("gradientColorStops.main-gradient-stop-1")} 0%, ${theme("gradientColorStops.main-gradient-stop-3")} 50.5%, ${theme("gradientColorStops.main-gradient-stop-4")} 100%)`,
+        "main-gradient-2": `linear-gradient(to right, ${theme("gradientColorStops.main-gradient-stop-2")} 0%, ${theme("gradientColorStops.main-gradient-stop-5")} 50.5%, ${theme("gradientColorStops.main-gradient-stop-6")} 100%)`,
+        "main-gradient-3": `linear-gradient(to right, ${theme("gradientColorStops.main-gradient-stop-2")} 0%, ${theme("gradientColorStops.main-gradient-stop-3")} 50.5%, ${theme("gradientColorStops.main-gradient-stop-4")} 100%)`,
+      }),
+      gradientColorStops: ({ theme }) => ({
+        "main-gradient-stop-1": theme("colors.accent.green"),
+        "main-gradient-stop-2": "#BEE035",
+        "main-gradient-stop-3": "#844071",
+        "main-gradient-stop-4": theme("colors.accent.blue"),
+        "main-gradient-stop-5": "#04C2C9",
+        "main-gradient-stop-6": "#E04133",
+      }),
+    },
     fontFamily: {
       primary: "Exo, sans-serif",
       secondary: "Inter, sans-serif",
