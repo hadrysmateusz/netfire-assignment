@@ -1,4 +1,5 @@
 import { DiscountCodeBanner } from "./components/DiscountCodeBanner";
+import { Hero } from "./components/Hero/Hero";
 import { Navbar } from "./components/Navbar";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <DiscountCodeBanner />
       <Navbar />
+      <Hero />
     </>
   );
 }

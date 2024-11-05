@@ -35,7 +35,9 @@ export default {
       "3xl": "2.8125rem",
     },
     colors: {
+      transparent: "transparent",
       white: "#FFFFFF",
+      black: "#000000",
       accent: {
         blue: "#404F84",
         green: "#CAEA71",
@@ -58,6 +60,7 @@ export default {
         6: "#443B3B",
         7: "#41423E",
       },
+      "video-placeholder": "#decda8",
     },
   },
   plugins: [],
