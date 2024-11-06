@@ -1,7 +1,6 @@
+import { Outlet } from "react-router-dom";
 import { DiscountCodeBanner } from "../components/DiscountCodeBanner";
-import { ExampleSection } from "../components/ExampleSection";
 import { Footer } from "../components/Footer";
-import { Hero } from "../components/Hero";
 import { Navbar } from "../components/Navbar";
 
 export const Root = () => {
@@ -9,8 +8,7 @@ export const Root = () => {
     <>
       <DiscountCodeBanner />
       <Navbar />
-      <Hero />
-      <ExampleSection />
+      <Outlet />
       <Footer />
     </>
   );
