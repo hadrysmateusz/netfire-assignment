@@ -1,5 +1,6 @@
 import { Icon } from "../Icon";
 import { ProgressBar } from "./ProgressBar";
+import { Timer } from "./Timer";
 import { useVideoControls } from "./useVideoControls";
 
 type Props = Omit<ReturnType<typeof useVideoControls>, "videoRef" | "getVideoProps">;
@@ -24,9 +25,7 @@ export const VideoControlsBar = ({
 
       <ProgressBar {...getProgressBarProps()} />
 
-      <div ref={timerRef} className="font-bold text-brownish-2 w-12 min-w-12 text-left">
-        00:00
-      </div>
+      <Timer ref={timerRef} />
     </div>
   );
 };
