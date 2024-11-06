@@ -86,7 +86,9 @@ export const useVideoControls = () => {
     const playbackTimeDisplay = playbackTimeDisplayRef.current;
     if (!playbackTimeDisplay) return;
 
-    playbackTimeDisplay.textContent = getFormattedTimeDisplay(video.currentTime);
+    playbackTimeDisplay.textContent = getFormattedTimeDisplay(
+      video.currentTime,
+    );
   }
 
   /**
@@ -99,7 +101,8 @@ export const useVideoControls = () => {
     if (!video) return;
 
     video.currentTime =
-      (event.nativeEvent.offsetX / event.currentTarget.offsetWidth) * video.duration;
+      (event.nativeEvent.offsetX / event.currentTarget.offsetWidth) *
+      video.duration;
 
     updateProgressBar();
   }

@@ -4,9 +4,17 @@ type Props = {
   startScrubbing: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
-export const ProgressBar = ({ progressBarRef, scrub, startScrubbing }: Props) => {
+export const ProgressBar = ({
+  progressBarRef,
+  scrub,
+  startScrubbing,
+}: Props) => {
   return (
-    <div className="w-full py-3 cursor-pointer" onMouseMove={scrub} onMouseDown={startScrubbing}>
+    <div
+      className="w-full py-3 cursor-pointer"
+      onMouseMove={scrub}
+      onMouseDown={startScrubbing}
+    >
       <div className="h-[10px] bg-gray-3 w-full rounded-full overflow-hidden">
         <div
           ref={progressBarRef}

@@ -2,7 +2,10 @@ import { Icon, IconId } from "../Icon";
 import { Variant, variants } from "./variants";
 
 type Props = Omit<
-  React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
+  React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >,
   "className"
 > & {
   icon: IconId;
@@ -10,7 +13,12 @@ type Props = Omit<
   fontSizeClassName?: string;
 };
 
-export const IconButton = ({ icon, variant, fontSizeClassName, ...buttonProps }: Props) => {
+export const IconButton = ({
+  icon,
+  variant,
+  fontSizeClassName,
+  ...buttonProps
+}: Props) => {
   const className = variants[variant];
 
   return (

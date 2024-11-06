@@ -7,9 +7,13 @@ export const ErrorPage = () => {
 
   return (
     <div className="h-svh text-center flex flex-col justify-center items-center font-primary">
-      <h1 className="font-semibold text-gray-4 tracking-tighter text-3xl">Oops! 😅</h1>
+      <h1 className="font-semibold text-gray-4 tracking-tighter text-3xl">
+        Oops! 😅
+      </h1>
       <p className="text-gray-4">An unexpected error has occurred.</p>
-      {!!errorMessage && <p className="text-gray-4 italic pt-4">{errorMessage}</p>}
+      {!!errorMessage && (
+        <p className="text-gray-4 italic pt-4">{errorMessage}</p>
+      )}
     </div>
   );
 };

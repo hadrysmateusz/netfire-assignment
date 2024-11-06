@@ -15,12 +15,14 @@ export const Footer = () => {
             </div>
           </div>
           <div className="text-2xs/tight tracking-[0.07em] font-secondary">
-            © 2024 <b>{BRAND_NAME}</b> All rights reserved. Unauthorized use or copying of this
-            brand is strictly prohibited. No part of this website may be reproduced, distributed, or
-            transmitted in any form or by any means, including photocopying, recording, or other
-            electronic or mechanical methods, without the prior written permission of{" "}
-            <b>{BRAND_NAME}</b>, except in the case of brief quotations embodied in critical reviews
-            and certain other non-commercial uses permitted by copyright law.
+            © 2024 <b>{BRAND_NAME}</b> All rights reserved. Unauthorized use or
+            copying of this brand is strictly prohibited. No part of this
+            website may be reproduced, distributed, or transmitted in any form
+            or by any means, including photocopying, recording, or other
+            electronic or mechanical methods, without the prior written
+            permission of <b>{BRAND_NAME}</b>, except in the case of brief
+            quotations embodied in critical reviews and certain other
+            non-commercial uses permitted by copyright law.
           </div>
         </div>
       </div>

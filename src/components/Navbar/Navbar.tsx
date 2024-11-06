@@ -21,9 +21,21 @@ export const Navbar = () => {
         </Link>
         <div>
           <ul className="flex gap-[20px] justify-end">
-            <IconButton icon="cart" variant="nav" fontSizeClassName="text-[23px]" />
-            <IconButton icon="user" variant="nav" fontSizeClassName="text-[28px]" />
-            <IconButton icon="search" variant="nav" fontSizeClassName="text-[25px]" />
+            <IconButton
+              icon="cart"
+              variant="nav"
+              fontSizeClassName="text-[23px]"
+            />
+            <IconButton
+              icon="user"
+              variant="nav"
+              fontSizeClassName="text-[28px]"
+            />
+            <IconButton
+              icon="search"
+              variant="nav"
+              fontSizeClassName="text-[25px]"
+            />
           </ul>
         </div>
       </div>
