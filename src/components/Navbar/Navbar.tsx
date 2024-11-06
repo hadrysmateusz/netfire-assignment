@@ -6,7 +6,6 @@ import { NavItem } from "./NavItem";
 import brandNameLogo from "/brand-name-logo.svg";
 
 export const Navbar = () => {
-  // TODO: control isActive state based on url
   return (
     <header className="flex justify-center h-[101px] border-b-brownish-4 border-b">
       <div className="w-page-container grid grid-cols-[1fr_max-content_1fr] items-center">
