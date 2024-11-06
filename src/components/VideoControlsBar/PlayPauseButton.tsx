@@ -10,6 +10,7 @@ export const PlayPauseButton = ({ playPauseVideo, isVideoPlaying }: Props) => {
   return (
     <IconButton
       icon={isVideoPlaying ? ICON_IDS.mediaPause : ICON_IDS.mediaPlay}
+      aria-label={isVideoPlaying ? "Pause Video" : "Play Video"}
       onClick={playPauseVideo}
       variant="play-pause"
     />
