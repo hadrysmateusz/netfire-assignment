@@ -5,8 +5,8 @@ export default {
     extend: {
       backgroundImage: ({ theme }) => ({
         "main-gradient-1": `linear-gradient(to right, ${theme("gradientColorStops.main-gradient-stop-1")} 0%, ${theme("gradientColorStops.main-gradient-stop-3")} 50.5%, ${theme("gradientColorStops.main-gradient-stop-4")} 100%)`,
-        "main-gradient-2": `linear-gradient(to right, ${theme("gradientColorStops.main-gradient-stop-2")} 0%, ${theme("gradientColorStops.main-gradient-stop-5")} 50.5%, ${theme("gradientColorStops.main-gradient-stop-6")} 100%)`,
-        "main-gradient-3": `linear-gradient(to right, ${theme("gradientColorStops.main-gradient-stop-2")} 0%, ${theme("gradientColorStops.main-gradient-stop-3")} 50.5%, ${theme("gradientColorStops.main-gradient-stop-4")} 100%)`,
+        "main-gradient-2": `linear-gradient(to right, ${theme("gradientColorStops.main-gradient-stop-2")} 11%, ${theme("gradientColorStops.main-gradient-stop-3")} 50.5%, ${theme("gradientColorStops.main-gradient-stop-4")} 100%)`,
+        "main-gradient-3": `linear-gradient(to right, ${theme("gradientColorStops.main-gradient-stop-2")} 3%, ${theme("gradientColorStops.main-gradient-stop-3")} 41%, ${theme("gradientColorStops.main-gradient-stop-4")} 65%)`,
       }),
       gradientColorStops: ({ theme }) => ({
         "main-gradient-stop-1": theme("colors.accent.green"),

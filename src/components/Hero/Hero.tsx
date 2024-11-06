@@ -25,7 +25,7 @@ export const Hero = () => {
           Lorem ipsum
         </div>
         <h1 className="font-semibold text-4xl/[1.26em] color-white max-w-[730px] text-white pb-14 tracking-tighter">
-          <span className="bg-main-gradient-3 bg-clip-text text-transparent">
+          <span className="bg-main-gradient-2 bg-clip-text text-transparent">
             Lorem Ipsum Dolor Sit amet
           </span>
           <br /> Donec cursus ligula diam, nec congue augue ultrices nec.
