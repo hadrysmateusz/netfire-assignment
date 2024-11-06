@@ -18,9 +18,9 @@ export const Navbar = () => {
         <img src={brandNameLogo} alt="Brand Name logo" />
         <div>
           <ul className="flex gap-[20px] justify-end">
-            <IconButton icon="cart" className="text-[23px]" />
-            <IconButton icon="user" className="text-[28px]" />
-            <IconButton icon="search" className="text-[25px]" />
+            <IconButton icon="cart" variant="nav" fontSizeClassName="text-[23px]" />
+            <IconButton icon="user" variant="nav" fontSizeClassName="text-[28px]" />
+            <IconButton icon="search" variant="nav" fontSizeClassName="text-[25px]" />
           </ul>
         </div>
       </div>

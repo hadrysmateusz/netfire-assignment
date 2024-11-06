@@ -1,31 +1,26 @@
-import { Icon } from "../Icon";
+import { PlayPauseButton } from "./PlayPauseButton";
 import { ProgressBar } from "./ProgressBar";
-import { Timer } from "./Timer";
+import { PlaybackTimeDisplay } from "./PlaybackTimeDisplay";
 import { useVideoControls } from "./useVideoControls";
 
-type Props = Omit<ReturnType<typeof useVideoControls>, "videoRef" | "getVideoProps">;
+type Props = Pick<
+  ReturnType<typeof useVideoControls>,
+  "getPlayPauseButtonProps" | "getProgressBarProps" | "playbackTimeDisplayRef"
+>;
 
 /**
  * Custom controls var for a video element.
  */
 export const VideoControlsBar = ({
-  playPauseVideo,
+  getPlayPauseButtonProps,
   getProgressBarProps,
-  isVideoPlaying,
-  timerRef,
+  playbackTimeDisplayRef,
 }: Props) => {
   return (
     <div className="pt-[21px] pb-6 pl-[33px] pr-[36px] bg-gray-7 bg-opacity-30 border border-white border-opacity-20 flex items-center gap-[30px] rounded-[10px]">
-      <button
-        onClick={playPauseVideo}
-        className="bg-gray-5 text-accent-green min-w-12 w-12 aspect-square rounded-full flex justify-center items-center border border-brownish-3"
-      >
-        <Icon icon={isVideoPlaying ? "media-pause" : "media-play"}></Icon>
-      </button>
-
+      <PlayPauseButton {...getPlayPauseButtonProps()} />
       <ProgressBar {...getProgressBarProps()} />
-
-      <Timer ref={timerRef} />
+      <PlaybackTimeDisplay ref={playbackTimeDisplayRef} />
     </div>
   );
 };

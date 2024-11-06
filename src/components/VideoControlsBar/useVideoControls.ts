@@ -11,7 +11,7 @@ import { getPercentage } from "../../utils/getPercentage";
  */
 export const useVideoControls = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const timerRef = useRef<HTMLDivElement>(null);
+  const playbackTimeDisplayRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   const scrubbingRef = useRef({ isScrubbing: false, wasPlaying: false });
@@ -83,10 +83,10 @@ export const useVideoControls = () => {
    * @returns The formatted time display in the format "mm:ss"
    */
   function setTimeDisplay(video: HTMLVideoElement) {
-    const timer = timerRef.current;
-    if (!timer) return;
+    const playbackTimeDisplay = playbackTimeDisplayRef.current;
+    if (!playbackTimeDisplay) return;
 
-    timer.textContent = getFormattedTimeDisplay(video.currentTime);
+    playbackTimeDisplay.textContent = getFormattedTimeDisplay(video.currentTime);
   }
 
   /**
@@ -177,6 +177,14 @@ export const useVideoControls = () => {
     startScrubbing,
   });
 
+  /**
+   * @returns An object containing props for the play/pause button component.
+   */
+  const getPlayPauseButtonProps = () => ({
+    playPauseVideo,
+    isVideoPlaying,
+  });
+
   // Resets the scrubbing state and restores playback state when the mouse is released anywhere on the page
   useEffect(() => {
     window.addEventListener("mouseup", stopScrubbing);
@@ -193,10 +201,10 @@ export const useVideoControls = () => {
   }, []);
 
   return {
-    timerRef,
-    isVideoPlaying,
+    playbackTimeDisplayRef,
     playPauseVideo,
     getVideoProps,
     getProgressBarProps,
+    getPlayPauseButtonProps,
   };
 };

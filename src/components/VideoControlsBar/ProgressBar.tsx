@@ -6,11 +6,8 @@ type Props = {
 
 export const ProgressBar = ({ progressBarRef, scrub, startScrubbing }: Props) => {
   return (
-    <div className="w-full py-4" onMouseMove={scrub}>
-      <div
-        className="h-[10px] bg-gray-3 w-full rounded-full overflow-hidden cursor-pointer"
-        onMouseDown={startScrubbing}
-      >
+    <div className="w-full py-3 cursor-pointer" onMouseMove={scrub} onMouseDown={startScrubbing}>
+      <div className="h-[10px] bg-gray-3 w-full rounded-full overflow-hidden">
         <div
           ref={progressBarRef}
           className="h-[10px] bg-accent-green pointer-events-none origin-left"

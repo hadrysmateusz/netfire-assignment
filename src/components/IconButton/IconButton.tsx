@@ -1,16 +1,20 @@
 import { Icon, IconId } from "../Icon";
+import { Variant, variants } from "./variants";
 
-type Props = { icon: IconId; className?: string };
+type Props = Omit<
+  React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
+  "className"
+> & {
+  icon: IconId;
+  variant: Variant;
+  fontSizeClassName?: string;
+};
 
-export const IconButton = ({ icon, className = "" }: Props) => {
+export const IconButton = ({ icon, variant, fontSizeClassName, ...buttonProps }: Props) => {
+  const className = variants[variant];
+
   return (
-    <button
-      className={
-        "bg-gray-2 text-brownish-6 border-brownish-4 border rounded-full flex justify-center items-center h-[43px] aspect-square" +
-        " " +
-        className
-      }
-    >
+    <button className={className + ` ${fontSizeClassName}`} {...buttonProps}>
       <Icon icon={icon} />
     </button>
   );
