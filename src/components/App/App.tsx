@@ -1,4 +1,5 @@
 import { DiscountCodeBanner } from "../DiscountCodeBanner";
+import { Footer } from "../Footer";
 import { Hero } from "../Hero";
 import { Navbar } from "../Navbar";
 
@@ -8,6 +9,7 @@ export const App = () => {
       <DiscountCodeBanner />
       <Navbar />
       <Hero />
+      <Footer />
     </>
   );
 };

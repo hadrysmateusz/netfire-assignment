@@ -1,4 +1,4 @@
-import { LOCAL_URLS, PAGES } from "../../constants";
+import { BRAND_NAME, LOCAL_URLS, PAGES } from "../../constants";
 import { IconButton } from "../IconButton";
 import { NavItem } from "./NavItem";
 import brandNameLogo from "/brand-name-logo.svg";
@@ -15,7 +15,7 @@ export const Navbar = () => {
             <NavItem label="Products" url={LOCAL_URLS[PAGES.products]} />
           </ul>
         </nav>
-        <img src={brandNameLogo} alt="Brand Name logo" />
+        <img src={brandNameLogo} alt={`${BRAND_NAME} logo`} />
         <div>
           <ul className="flex gap-[20px] justify-end">
             <IconButton icon="cart" variant="nav" fontSizeClassName="text-[23px]" />
