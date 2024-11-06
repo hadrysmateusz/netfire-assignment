@@ -12,7 +12,7 @@ export const NavItem = ({ label, url }: Props) => {
         to={url}
         className={({ isActive, isPending }) => {
           const baseClasses =
-            "w-full h-10 flex items-center px-6 border-brownish-4 border rounded-md uppercase text-sm/[1.33] font-primary tracking-[0.07em]";
+            "w-full h-10 flex items-center px-6 border-brownish-4 border rounded-md uppercase text-sm/[1.33] font-primary tracking-[0.07em] hover:bg-brownish-1";
           if (isActive || isPending) {
             return `${baseClasses} bg-brownish-1 text-gray-6 font-semibold`;
           }

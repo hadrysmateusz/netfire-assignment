@@ -13,7 +13,7 @@ export const ExampleSection = () => {
           massa lacinia ultricies. Suspendisse lobortis vehicula eros, sed sodales eros mollis eget.
           Morbi vitae libero in nunc sodales.
         </p>
-        <div className="uppercase tracking-[0.07em] text-brownish-7 font-semibold font-secondary text-sm underline underline-offset-2 cursor-pointer">
+        <div className="uppercase tracking-[0.07em] text-brownish-7 font-semibold font-secondary text-sm underline underline-offset-2 cursor-pointer hover:text-brownish-5">
           See more
         </div>
       </div>
