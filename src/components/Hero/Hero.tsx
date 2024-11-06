@@ -1,4 +1,4 @@
-import { CDN_DOMAIN, HERO_VIDEO_PATH } from "../../constants";
+import { CDN_DOMAIN, HERO_VIDEO_PATH } from "../../config/constants";
 import { useVideoControls, VideoControlsBar } from "../VideoControlsBar";
 
 export const Hero = () => {

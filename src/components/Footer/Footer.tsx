@@ -1,4 +1,4 @@
-import { BRAND_NAME } from "../../constants";
+import { BRAND_NAME } from "../../config/constants";
 import { GradientSeparator } from "../GradientSeparator";
 import brandNameLogo from "/brand-name-logo.svg";
 

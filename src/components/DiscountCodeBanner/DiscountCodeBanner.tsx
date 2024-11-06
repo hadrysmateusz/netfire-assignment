@@ -1,4 +1,4 @@
-import { NEW_CUSTOMER_DISCOUNT_CODE, NEW_CUSTOMER_DISCOUNT_PERCDENT } from "../../constants";
+import { NEW_CUSTOMER_DISCOUNT_CODE, NEW_CUSTOMER_DISCOUNT_PERCDENT } from "../../config/constants";
 import { Banner } from "../Banner";
 
 export const DiscountCodeBanner = () => {

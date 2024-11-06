@@ -1,4 +1,5 @@
-import { BRAND_NAME, LOCAL_URLS, PAGES } from "../../constants";
+import { LOCAL_URLS, PAGES } from "../../config";
+import { BRAND_NAME } from "../../config/constants";
 import { IconButton } from "../IconButton";
 import { NavItem } from "./NavItem";
 import brandNameLogo from "/brand-name-logo.svg";
