@@ -28,7 +28,7 @@ export const useVideoControls = () => {
     if (!video || !progressBar) return;
 
     const progress = getPercentage(video.currentTime, video.duration);
-    progressBar.style.transform = `scaleX(${progress}%)`;
+    progressBar.style.transform = `scaleX(${progress.toString()}%)`;
   };
 
   /**
@@ -70,7 +70,7 @@ export const useVideoControls = () => {
     if (!video) return;
 
     if (video.paused || video.ended) {
-      video.play();
+      void video.play();
     } else {
       video.pause();
     }
@@ -94,7 +94,7 @@ export const useVideoControls = () => {
    *
    * @param event A react mouse event used to calculate the new playback position
    */
-  function setPlaybackPosition(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function setPlaybackPosition(event: React.MouseEvent<HTMLDivElement>) {
     const video = videoRef.current;
     if (!video) return;
 
@@ -107,7 +107,7 @@ export const useVideoControls = () => {
   /**
    * Initiates scrubbing by pausing the video and setting the scrubbing state.
    */
-  function startScrubbing(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function startScrubbing(event: React.MouseEvent<HTMLDivElement>) {
     const video = videoRef.current;
     if (!video) return;
 
@@ -128,7 +128,7 @@ export const useVideoControls = () => {
     if (!video) return;
 
     if (wasPlaying) {
-      video.play();
+      void video.play();
     }
   }
 
@@ -137,7 +137,7 @@ export const useVideoControls = () => {
    *
    * @param event A react mouse event used to calculate the new playback position
    */
-  function scrub(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function scrub(event: React.MouseEvent<HTMLDivElement>) {
     if (!scrubbingRef.current.isScrubbing) return;
     setPlaybackPosition(event);
   }
@@ -160,10 +160,10 @@ export const useVideoControls = () => {
       stopUpdatingProgressBar();
     },
     // This prevents changing video state and settings via right-clicking
-    onContextMenu: (event: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
+    onContextMenu: (event: React.MouseEvent<HTMLVideoElement>) => {
       event.preventDefault();
     },
-    onTimeUpdate: (event: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    onTimeUpdate: (event: React.SyntheticEvent<HTMLVideoElement>) => {
       setTimeDisplay(event.currentTarget);
     },
   });

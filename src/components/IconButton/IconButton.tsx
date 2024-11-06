@@ -14,7 +14,10 @@ export const IconButton = ({ icon, variant, fontSizeClassName, ...buttonProps }:
   const className = variants[variant];
 
   return (
-    <button className={className + ` ${fontSizeClassName}`} {...buttonProps}>
+    <button
+      className={className + (fontSizeClassName ? ` ${fontSizeClassName}` : "")}
+      {...buttonProps}
+    >
       <Icon icon={icon} />
     </button>
   );

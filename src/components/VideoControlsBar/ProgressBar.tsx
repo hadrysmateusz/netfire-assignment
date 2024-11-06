@@ -1,7 +1,7 @@
 type Props = {
   progressBarRef: React.RefObject<HTMLDivElement>;
-  scrub: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  startScrubbing: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  scrub: (event: React.MouseEvent<HTMLDivElement>) => void;
+  startScrubbing: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 export const ProgressBar = ({ progressBarRef, scrub, startScrubbing }: Props) => {
