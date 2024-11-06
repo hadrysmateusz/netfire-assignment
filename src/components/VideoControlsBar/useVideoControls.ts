@@ -3,16 +3,20 @@ import { getFormattedTimeDisplay } from "./getFormattedTimeDisplay";
 import { getPercentage } from "../../utils/getPercentage";
 
 /**
- * A custom hook that manages custom controls for a video element.
+ * A hook that manages custom controls for a video element.
+ *
+ * Use th
  *
  * Refs are used instead of state to avoid unnecessary re-renders, considering the large frequency of updates.
  */
-export const useCustomVideoControls = () => {
+export const useVideoControls = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const timerRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
+
   const scrubbingRef = useRef({ isScrubbing: false, wasPlaying: false });
   const animationFrameIdRef = useRef<number | null>(null);
+
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   /**
@@ -88,9 +92,9 @@ export const useCustomVideoControls = () => {
   /**
    * Sets the current time of the video based on the mouse position.
    *
-   * @param event A react mouse event used to calculate the scrub time
+   * @param event A react mouse event used to calculate the new playback position
    */
-  function scrub(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function setPlaybackPosition(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const video = videoRef.current;
     if (!video) return;
 
@@ -103,18 +107,46 @@ export const useCustomVideoControls = () => {
   /**
    * Initiates scrubbing by pausing the video and setting the scrubbing state.
    */
-  function startScrubbing() {
+  function startScrubbing(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const video = videoRef.current;
     if (!video) return;
 
     scrubbingRef.current = { isScrubbing: true, wasPlaying: !video.paused };
     video.pause();
+    setPlaybackPosition(event);
+  }
+
+  /**
+   * Stops scrubbing and restores playback state.
+   */
+  function stopScrubbing() {
+    const wasPlaying = scrubbingRef.current.wasPlaying;
+
+    scrubbingRef.current = { isScrubbing: false, wasPlaying: false };
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (wasPlaying) {
+      video.play();
+    }
+  }
+
+  /**
+   * Scrubs the video based on the mouse position.
+   *
+   * @param event A react mouse event used to calculate the new playback position
+   */
+  function scrub(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (!scrubbingRef.current.isScrubbing) return;
+    setPlaybackPosition(event);
   }
 
   /**
    * @returns An object containing props for the `<video>` element.
    */
   const getVideoProps = () => ({
+    ref: videoRef,
     onPlay: () => {
       setIsVideoPlaying(true);
       startUpdatingProgressBar();
@@ -137,45 +169,23 @@ export const useCustomVideoControls = () => {
   });
 
   /**
-   * @returns An object containing props for the progress bar wrapper element. The progress bar wrapper is the full-width background of the progress bar.
+   * @returns An object containing props for the progress bar component.
    */
-  const getProgressBarWrapperProps = () => ({
-    onClick: scrub,
-    onMouseDown: startScrubbing,
-  });
-
-  /**
-   * @returns An object containing props for the progress bar extension element. The progress bar extension is an invisible part of the progress bar that extends above and below it.
-   */
-  const getProgressBarExtensionProps = () => ({
-    // This event is handled on a separate, larger wrapper to reduce the precision required for scrubbing
-    onMouseMove: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      if (!scrubbingRef.current.isScrubbing) return;
-      scrub(event);
-    },
+  const getProgressBarProps = () => ({
+    progressBarRef,
+    scrub,
+    startScrubbing,
   });
 
   // Resets the scrubbing state and restores playback state when the mouse is released anywhere on the page
   useEffect(() => {
-    function handleMouseUp() {
-      const wasPlaying = scrubbingRef.current.wasPlaying;
-
-      scrubbingRef.current = { isScrubbing: false, wasPlaying: false };
-
-      const video = videoRef.current;
-      if (!video) return;
-
-      if (wasPlaying) {
-        video.play();
-      }
-    }
-
-    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mouseup", stopScrubbing);
     return () => {
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mouseup", stopScrubbing);
     };
   }, []);
 
+  // Cleanup to stop the progress bar updater animation when the component is unmounted
   useEffect(() => {
     return () => {
       stopUpdatingProgressBar();
@@ -183,13 +193,10 @@ export const useCustomVideoControls = () => {
   }, []);
 
   return {
-    videoRef,
     timerRef,
-    progressBarRef,
     isVideoPlaying,
-    getVideoProps,
     playPauseVideo,
-    getProgressBarWrapperProps,
-    getProgressBarExtensionProps,
+    getVideoProps,
+    getProgressBarProps,
   };
 };

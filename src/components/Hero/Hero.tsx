@@ -1,9 +1,8 @@
 import { CDN_DOMAIN, HERO_VIDEO_PATH } from "../../constants";
-import { useCustomVideoControls } from "./useCustomVideoControls";
-import { VideoControlsBar } from "./VideoControlsBar";
+import { useVideoControls, VideoControlsBar } from "../VideoControlsBar";
 
 export const Hero = () => {
-  const { videoRef, getVideoProps, ...controlsBarProps } = useCustomVideoControls();
+  const { getVideoProps, ...controlsBarProps } = useVideoControls();
 
   return (
     <section className="w-full h-[909px] overflow-hidden relative flex justify-center items-center font-primary">
@@ -14,7 +13,6 @@ export const Hero = () => {
         muted
         className="w-full h-full absolute object-cover -z-20 bg-video-placeholder"
         src={CDN_DOMAIN + HERO_VIDEO_PATH}
-        ref={videoRef}
         {...getVideoProps()}
       >
         Your browser does not support video playback.

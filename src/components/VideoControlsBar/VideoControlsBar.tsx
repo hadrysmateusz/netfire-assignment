@@ -1,17 +1,16 @@
 import { Icon } from "../Icon";
-import { useCustomVideoControls } from "./useCustomVideoControls";
+import { ProgressBar } from "./ProgressBar";
+import { useVideoControls } from "./useVideoControls";
 
-type Props = Omit<ReturnType<typeof useCustomVideoControls>, "videoRef" | "getVideoProps">;
+type Props = Omit<ReturnType<typeof useVideoControls>, "videoRef" | "getVideoProps">;
 
 /**
  * Custom controls var for a video element.
  */
 export const VideoControlsBar = ({
   playPauseVideo,
-  getProgressBarWrapperProps,
-  getProgressBarExtensionProps,
+  getProgressBarProps,
   isVideoPlaying,
-  progressBarRef,
   timerRef,
 }: Props) => {
   return (
@@ -23,17 +22,7 @@ export const VideoControlsBar = ({
         <Icon icon={isVideoPlaying ? "media-pause" : "media-play"}></Icon>
       </button>
 
-      <div className="w-full py-4" {...getProgressBarExtensionProps()}>
-        <div
-          className="h-[10px] bg-gray-3 w-full rounded-full overflow-hidden cursor-pointer"
-          {...getProgressBarWrapperProps()}
-        >
-          <div
-            ref={progressBarRef}
-            className="h-[10px] bg-accent-green pointer-events-none origin-left"
-          />
-        </div>
-      </div>
+      <ProgressBar {...getProgressBarProps()} />
 
       <div ref={timerRef} className="font-bold text-brownish-2 w-12 min-w-12 text-left">
         00:00
