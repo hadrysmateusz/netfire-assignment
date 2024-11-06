@@ -11,7 +11,7 @@ export const Navbar = () => {
       <div className="w-page-container grid grid-cols-[1fr_max-content_1fr] items-center">
         <nav>
           <ul className="flex gap-[15px]">
-            <NavItem label="Home" url={LOCAL_URLS[PAGES.home]} isActive />
+            <NavItem label="Home" url={LOCAL_URLS[PAGES.home]} />
             <NavItem label="About" url={LOCAL_URLS[PAGES.about]} />
             <NavItem label="Products" url={LOCAL_URLS[PAGES.products]} />
           </ul>
