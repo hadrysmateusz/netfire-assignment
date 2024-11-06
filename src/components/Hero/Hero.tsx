@@ -1,4 +1,5 @@
 import { CDN_DOMAIN, HERO_VIDEO_PATH } from "../../config/constants";
+import { SectionBadge } from "../SectionBadge";
 import { useVideoControls, VideoControlsBar } from "../VideoControlsBar";
 
 export const Hero = () => {
@@ -21,10 +22,10 @@ export const Hero = () => {
       <div className="w-full h-full absolute -z-10 bg-black bg-opacity-40" />
 
       <div className="page-container mt-[150px]">
-        <div className="uppercase text-white rounded-[14px] border border-brownish-6 bg-gray-2 bg-opacity-[19%] w-max h-11 px-[22px] flex items-center text-xs mb-[38px] tracking-[0.07em] font-medium">
+        <SectionBadge size="sm" textColorClass="text-white">
           Lorem ipsum
-        </div>
-        <h1 className="font-semibold text-4xl/[1.26em] color-white max-w-[730px] text-white pb-14 tracking-tighter">
+        </SectionBadge>
+        <h1 className="font-semibold text-4xl/[1.26em] color-white max-w-[730px] text-white mt-[38px] mb-14 tracking-tighter">
           <span className="bg-main-gradient-2 bg-clip-text text-transparent">
             Lorem Ipsum Dolor Sit amet
           </span>
