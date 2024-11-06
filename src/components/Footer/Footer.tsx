@@ -7,7 +7,7 @@ export const Footer = () => {
     <footer>
       <GradientSeparator />
       <div className="text-brownish-5 bg-gray-2 flex justify-center py-6">
-        <div className="w-page-container flex items-center gap-[71px]">
+        <div className="page-container flex items-center gap-[71px]">
           <div className="flex items-center shrink-0 gap-6">
             <img src={brandNameLogo} alt={`${BRAND_NAME} logo`} />
             <div className="font-semibold font-primary tracking-[0.07em] text-2xl/[1.33]">

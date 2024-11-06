@@ -1,7 +1,7 @@
 export const ExampleSection = () => {
   return (
     <section className="w-full font-primary flex justify-center items-center pt-[61px] pb-[71px] bg-gray-1">
-      <div className="w-page-container flex justify-center items-center flex-col">
+      <div className="page-container flex justify-center items-center flex-col">
         <div className="uppercase text-gray-4 rounded-[14px] border border-brownish-6 bg-gray-2 bg-opacity-[19%] w-max h-[53px] px-[22px] flex items-center text-xs mb-8 tracking-[0.07em] font-medium">
           Example section
         </div>

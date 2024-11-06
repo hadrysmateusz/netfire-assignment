@@ -8,7 +8,7 @@ import brandNameLogo from "/brand-name-logo.svg";
 export const Navbar = () => {
   return (
     <header className="flex justify-center h-[101px] border-b-brownish-4 border-b">
-      <div className="w-page-container grid grid-cols-[1fr_max-content_1fr] items-center">
+      <div className="page-container grid grid-cols-[1fr_max-content_1fr] items-center">
         <nav>
           <ul className="flex gap-[15px]">
             <NavItem label="Home" url={LOCAL_URLS[PAGES.home]} />

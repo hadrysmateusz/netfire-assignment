@@ -5,3 +5,11 @@
 :root {
   font-size: 16px;
 }
+
+
+@layer components {
+  .page-container {
+    width: calc(1337px + theme(spacing.4) * 2);
+    padding: 0 theme(spacing.4);
+  }
+}
