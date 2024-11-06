@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { LOCAL_URLS, PAGES } from "../../config";
 import { BRAND_NAME } from "../../config/constants";
 import { IconButton } from "../IconButton";
@@ -16,7 +17,9 @@ export const Navbar = () => {
             <NavItem label="Products" url={LOCAL_URLS[PAGES.products]} />
           </ul>
         </nav>
-        <img src={brandNameLogo} alt={`${BRAND_NAME} logo`} />
+        <Link to={LOCAL_URLS[PAGES.home]}>
+          <img src={brandNameLogo} alt={`${BRAND_NAME} logo`} />
+        </Link>
         <div>
           <ul className="flex gap-[20px] justify-end">
             <IconButton icon="cart" variant="nav" fontSizeClassName="text-[23px]" />
