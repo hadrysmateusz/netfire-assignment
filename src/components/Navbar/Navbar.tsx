@@ -4,6 +4,7 @@ import { BRAND_NAME } from "../../config/constants";
 import { IconButton } from "../IconButton";
 import { NavItem } from "./NavItem";
 import brandNameLogo from "/brand-name-logo.svg";
+import { ICON_IDS } from "../Icon";
 
 export const Navbar = () => {
   return (
@@ -21,21 +22,9 @@ export const Navbar = () => {
         </Link>
         <div>
           <ul className="flex gap-[20px] justify-end">
-            <IconButton
-              icon="cart"
-              variant="nav"
-              fontSizeClassName="text-[23px]"
-            />
-            <IconButton
-              icon="user"
-              variant="nav"
-              fontSizeClassName="text-[28px]"
-            />
-            <IconButton
-              icon="search"
-              variant="nav"
-              fontSizeClassName="text-[25px]"
-            />
+            <IconButton icon={ICON_IDS.cart} variant="nav" fontSizeClassName="text-[23px]" />
+            <IconButton icon={ICON_IDS.user} variant="nav" fontSizeClassName="text-[28px]" />
+            <IconButton icon={ICON_IDS.search} variant="nav" fontSizeClassName="text-[25px]" />
           </ul>
         </div>
       </div>
