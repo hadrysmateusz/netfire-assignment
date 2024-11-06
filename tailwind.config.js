@@ -32,7 +32,8 @@ export default {
       lg: "1.125rem",
       xl: "1.25rem",
       "2xl": "1.5rem",
-      "3xl": "2.8125rem",
+      "3xl": "2rem",
+      "4xl": "2.8125rem",
     },
     colors: {
       transparent: "transparent",
