@@ -2,13 +2,61 @@ import { useEffect, useRef, useState } from "react";
 import { getFormattedTimeDisplay } from "./getFormattedTimeDisplay";
 import { getPercentage } from "../../utils/getPercentage";
 
+/**
+ * A custom hook that manages custom controls for a video element.
+ *
+ * Refs are used instead of state to avoid unnecessary re-renders, considering the large frequency of updates.
+ */
 export const useCustomVideoControls = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const timerRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
-  const scrubbing = useRef({ isScrubbing: false, wasPlaying: false });
+  const scrubbingRef = useRef({ isScrubbing: false, wasPlaying: false });
+  const animationFrameIdRef = useRef<number | null>(null);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+  /**
+   * Updates the progress bar based on the current time of the video.
+   */
+  const updateProgressBar = () => {
+    const video = videoRef.current;
+    const progressBar = progressBarRef.current;
+    if (!video || !progressBar) return;
+
+    const progress = getPercentage(video.currentTime, video.duration);
+    progressBar.style.transform = `scaleX(${progress}%)`;
+  };
+
+  /**
+   * A recursive animation frame function that updates the progress bar based on the current time of the video.
+   *
+   * `requestAnimationFrame` is used to ensure the progress bar is updated smoothly.
+   */
+  const stepProgressBarUpdate = () => {
+    updateProgressBar();
+    animationFrameIdRef.current = requestAnimationFrame(stepProgressBarUpdate);
+  };
+
+  /**
+   * Starts the progress bar updater animation.
+   */
+  const startUpdatingProgressBar = () => {
+    const animationFrameId = animationFrameIdRef.current;
+    if (animationFrameId !== null) return;
+
+    stepProgressBarUpdate();
+  };
+
+  /**
+   * Stops the progress bar updater animation.
+   */
+  const stopUpdatingProgressBar = () => {
+    const animationFrameId = animationFrameIdRef.current;
+    if (animationFrameId === null) return;
+
+    cancelAnimationFrame(animationFrameId);
+    animationFrameIdRef.current = null;
+  };
 
   /**
    * Plays or pauses the video based on its current state.
@@ -27,6 +75,7 @@ export const useCustomVideoControls = () => {
   /**
    * Sets the text-based time display based on the current time of the video.
    *
+   * @param video The video element to get the current time from
    * @returns The formatted time display in the format "mm:ss"
    */
   function setTimeDisplay(video: HTMLVideoElement) {
@@ -34,16 +83,6 @@ export const useCustomVideoControls = () => {
     if (!timer) return;
 
     timer.textContent = getFormattedTimeDisplay(video.currentTime);
-  }
-
-  /**
-   * Sets the progress bar width based on the current time of the video.
-   */
-  function setProgressBar(video: HTMLVideoElement) {
-    const progressBar = progressBarRef.current;
-    if (!progressBar) return;
-
-    progressBar.style.width = `${getPercentage(video.currentTime, video.duration)}%`;
   }
 
   /**
@@ -55,9 +94,10 @@ export const useCustomVideoControls = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    const scrubTime =
+    video.currentTime =
       (event.nativeEvent.offsetX / event.currentTarget.offsetWidth) * video.duration;
-    video.currentTime = scrubTime;
+
+    updateProgressBar();
   }
 
   /**
@@ -67,7 +107,7 @@ export const useCustomVideoControls = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    scrubbing.current = { isScrubbing: true, wasPlaying: !video.paused };
+    scrubbingRef.current = { isScrubbing: true, wasPlaying: !video.paused };
     video.pause();
   }
 
@@ -75,16 +115,24 @@ export const useCustomVideoControls = () => {
    * @returns An object containing props for the `<video>` element.
    */
   const getVideoProps = () => ({
-    onPlay: () => setIsVideoPlaying(true),
-    onPause: () => setIsVideoPlaying(false),
-    onEnded: () => setIsVideoPlaying(false),
+    onPlay: () => {
+      setIsVideoPlaying(true);
+      startUpdatingProgressBar();
+    },
+    onPause: () => {
+      setIsVideoPlaying(false);
+      stopUpdatingProgressBar();
+    },
+    onEnded: () => {
+      setIsVideoPlaying(false);
+      stopUpdatingProgressBar();
+    },
     // This prevents changing video state and settings via right-clicking
     onContextMenu: (event: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
       event.preventDefault();
     },
     onTimeUpdate: (event: React.SyntheticEvent<HTMLVideoElement, Event>) => {
       setTimeDisplay(event.currentTarget);
-      setProgressBar(event.currentTarget);
     },
   });
 
@@ -102,17 +150,17 @@ export const useCustomVideoControls = () => {
   const getProgressBarExtensionProps = () => ({
     // This event is handled on a separate, larger wrapper to reduce the precision required for scrubbing
     onMouseMove: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      if (!scrubbing.current.isScrubbing) return;
+      if (!scrubbingRef.current.isScrubbing) return;
       scrub(event);
     },
   });
 
-  // Resets the scrubbing state and restore playback state when the mouse is released anywhere on the page
+  // Resets the scrubbing state and restores playback state when the mouse is released anywhere on the page
   useEffect(() => {
     function handleMouseUp() {
-      const wasPlaying = scrubbing.current.wasPlaying;
+      const wasPlaying = scrubbingRef.current.wasPlaying;
 
-      scrubbing.current = { isScrubbing: false, wasPlaying: false };
+      scrubbingRef.current = { isScrubbing: false, wasPlaying: false };
 
       const video = videoRef.current;
       if (!video) return;
@@ -125,6 +173,12 @@ export const useCustomVideoControls = () => {
     window.addEventListener("mouseup", handleMouseUp);
     return () => {
       window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      stopUpdatingProgressBar();
     };
   }, []);
 

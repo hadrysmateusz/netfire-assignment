@@ -3,6 +3,9 @@ import { useCustomVideoControls } from "./useCustomVideoControls";
 
 type Props = Omit<ReturnType<typeof useCustomVideoControls>, "videoRef" | "getVideoProps">;
 
+/**
+ * Custom controls var for a video element.
+ */
 export const VideoControlsBar = ({
   playPauseVideo,
   getProgressBarWrapperProps,
@@ -25,7 +28,10 @@ export const VideoControlsBar = ({
           className="h-[10px] bg-gray-3 w-full rounded-full overflow-hidden cursor-pointer"
           {...getProgressBarWrapperProps()}
         >
-          <div ref={progressBarRef} className="h-[10px] bg-accent-green pointer-events-none" />
+          <div
+            ref={progressBarRef}
+            className="h-[10px] bg-accent-green pointer-events-none origin-left"
+          />
         </div>
       </div>
 
